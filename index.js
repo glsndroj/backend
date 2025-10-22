@@ -2,6 +2,8 @@ import chalk from 'chalk';
 import { configDotenv } from 'dotenv';
 import express, { response } from 'express'
 import bodyParser from 'body-parser';
+import { connectDB } from './db.js';
+import { createUser, getUser } from './src/controllers/user.js';
 
 configDotenv()
 
@@ -15,21 +17,24 @@ const students = [
 
 ]
 
+app.post('/students', createUser)
+app.get('/students-details', getUser)
+
 app.get('/students', async (request, response) => {
     response.send(students)
 })
 
-app.post('/students', async (request, response) => {
-    console.log(request.body)
-    const previousStudents = students.filter((student) => student.phonenumber === request.body.phonenumber)
-    console.log(previousStudents, "students")
-    if(previousStudents.length === 0){
-        students.push(request.body)
-       return response.status(200).send(students).end()
-    }else {
-       return response.status(409).send({ message: "Duplicated"})
-    }
-})
+// app.post('/students', async (request, response) => {
+//     console.log(request.body)
+//     const previousStudents = students.filter((student) => student.phonenumber === request.body.phonenumber)
+//     console.log(previousStudents, "students")
+//     if(previousStudents.length === 0){
+//         students.push(request.body)
+//        return response.status(200).send(students).end()
+//     }else {
+//        return response.status(409).send({ message: "Duplicated"})
+//     }
+// })
 
 app.patch('/students', (request, response) => {
     const phone = request.params.phonenumber;
@@ -79,30 +84,8 @@ app.patch('/students', (request, response) => {
 // response.send(studentsDetails)
 // })
 app.listen(port, () => {
+    connectDB();
     console.log(chalk.green(`Server is running! http://localhost:${port}`))
 })
-
-
-
-// app.get('/', async (request, response) => {
-//     const res = await axios.get('https://gogo.mn/cache/news-shinemedee?size=15')
-//     response.send(res.data)
-
-// })
-
-
-// console.log(
-//     await figlet.text("Mangar Galsaa ah!", {
-//       font: "Ghost",
-//       horizontalLayout: "default",
-//       verticalLayout: "default",
-//       width: 80,
-//       whitespaceBreak: true,
-//     })
-//   );
-
-
-
-
 
 
