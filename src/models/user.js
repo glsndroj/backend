@@ -6,7 +6,7 @@ const userSchemas = new Schema({
     lastname: { type: String, requered: true},
     phonenumber: { type: Number, requered: true },
     age: {type: Number, requered: true },
-    gender: {type: String, requered: true }
+    gender: {type: String, enum: ['Male', 'Female'] }
 })
 
 export const User = mongoose.model("User", userSchemas)
