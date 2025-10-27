@@ -3,7 +3,6 @@ import { configDotenv } from 'dotenv';
 import express, { response, Router } from 'express'
 import bodyParser from 'body-parser';
 import { connectDB } from './database/db.js';
-import { createUser, getUser, getUsersById, UpdateUserById } from './controllers/user.js';
 import { UserRouter } from './routers/user.js';
 
 configDotenv()

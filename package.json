@@ -4,7 +4,7 @@
   "description": "backend intro",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js",
+    "dev": "nodemon src/ index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -20,8 +20,10 @@
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "figlet": "^1.9.3",
-    "mongoose": "^8.19.2",
-    "nodemon": "^3.1.10"
+    "mongoose": "^8.19.2"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
 }
